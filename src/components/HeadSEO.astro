@@ -13,7 +13,7 @@ const pageTitle = contentTitle ? `${title}${contentTitle}` : title;
 const isArticle = contentTitle && content.date;
 const imageSrc = isArticle ? (socialImage || siteImage) : icon;
 const description = contentDescription || siteDescription;
-const preloadImage = image ? `${image}?x-oss-process=image/resize,w_1200/format,webp` : false;
+const preloadImage = image || false;
 const canonicalURL = new URL(pageURL, homePage).href;
 
 // Structured data
@@ -27,7 +27,7 @@ const structuredData = isArticle
       author: {
         '@type': 'Person',
         name: author,
-        url: `https://twitter.com/${twitterId}`,
+        ...(twitterId ? { url: `https://twitter.com/${twitterId}` } : {}),
       },
       publisher: {
         '@type': 'Organization',
@@ -64,7 +64,7 @@ const structuredData = isArticle
 <meta name='twitter:image' content={imageSrc} />
 <meta name='twitter:site' content={homePage} />
 <meta property='twitter:url' content={pageURL} />
-<meta name='twitter:creator' content={`@${twitterId}`} />
+{twitterId && <meta name='twitter:creator' content={`@${twitterId}`} />}
 <meta property='twitter:description' content={description} />
 <meta name='keywords' content={keywords} />
 <meta name='author' content={author} />

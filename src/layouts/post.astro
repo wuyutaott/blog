@@ -76,11 +76,6 @@ const getGiscusTerm = () => {
 
 const giscusTerm = getGiscusTerm();
 
-const cleanPath = effectivePath.startsWith('/en/') ? effectivePath.slice(3) : effectivePath;
-const zhPath = cleanPath;
-const enPath = `/en${cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath}`;
-const translationLabel = lang === 'en' ? '切换到中文' : 'Switch to English';
-
 const giscusTheme = `${Astro.url.origin}/styles/giscus-light.css`;
 ---
 
@@ -313,23 +308,18 @@ const giscusTheme = `${Astro.url.origin}/styles/giscus-light.css`;
           </span>
           <ReaderModeToggle />
           <Search />
-          <a
-            href={lang === 'en' ? zhPath : enPath}
-            class='lang-switch-wrapper flex items-center justify-center h-9 w-9 rounded-full ml-2 !bg-gray-100 dark:!bg-gray-800 text-sm font-medium transition-colors !text-gray-600 dark:!text-gray-400 hover:!text-gray-900 dark:hover:!text-gray-200 lang-switch-mobile-btn'
-            aria-label={translationLabel}
-          >
-            {lang === 'en' ? '中' : 'En'}
-          </a>
         </h1>
         <slot />
-        <div class='flex align-middle justify-center mt-4 pay-button-wrapper'>
-          <a
-            class='inline-block items-center rounded px-5 py-3 text-sm font-medium pay-button'
-            href={SUPPORT_CALLOUT.link}
-            target='_blank'
-            rel='noreferrer'>{SUPPORT_CALLOUT[lang]}</a
-          >
-        </div>
+        {SUPPORT_CALLOUT.link && (
+          <div class='flex align-middle justify-center mt-4 pay-button-wrapper'>
+            <a
+              class='inline-block items-center rounded px-5 py-3 text-sm font-medium pay-button'
+              href={SUPPORT_CALLOUT.link}
+              target='_blank'
+              rel='noreferrer'>{SUPPORT_CALLOUT[lang]}</a
+            >
+          </div>
+        )}
         <hr class='post-divider' />
         <div class='flex justify-between md:flex-row flex-col mt-2 post-footer'>
           <div class='text-gray-800 dark:text-gray-200 flex-1'>
@@ -344,8 +334,8 @@ const giscusTheme = `${Astro.url.origin}/styles/giscus-light.css`;
             {nextUrl ? <a href={translatePath(nextUrl)}>{lang === 'en' ? 'Next' : '下一篇'} |</a> : null}
             {prevUrl ? <a href={translatePath(prevUrl)}>{lang === 'en' ? 'Prev' : '上一篇'} |</a> : null}
             <a href={translatePath('/')}>{lang === 'en' ? 'Home' : '去首页'} |</a>
-            <a href={`https://twitter.com/${SITE.twitterId}`} target='_blank' title='Follow'>Twitter</a>
-            <a href={`https://github.com/${SITE.repo}`} title='Star' target='_blank' class='lg:inline-block hidden'> | Github</a>
+            {SITE.twitterId && <a href={`https://twitter.com/${SITE.twitterId}`} target='_blank' title='Follow'>Twitter</a>}
+            <a href={`https://github.com/${SITE.repo}`} title='Star' target='_blank' class='lg:inline-block hidden'>{SITE.twitterId ? ' | ' : ''}Github</a>
             <a href='/rss.xml' title='Subscribe' target='_blank' class='xl:inline-block hidden'> | RSS</a>
           </div>
         </div>

@@ -9,11 +9,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useLocalizedPath(lang);
 
-// Dynamically fetch posts based on language
-const posts =
-  lang === 'en'
-    ? Object.values(import.meta.glob('../pages/en/posts/*.md', { eager: true }))
-    : Object.values(import.meta.glob('../pages/posts/*.md', { eager: true }));
+const posts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: true }));
 
 const allPosts = sortPosts(posts);
 

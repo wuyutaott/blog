@@ -11,8 +11,8 @@ export const ui = {
     "nav.posts": "Posts",
     "nav.twitter": "Twitter",
     "nav.github": "GitHub",
-    "site.title": "潮流周刊",
-    "site.description": "记录工程师 Tw93 的不枯燥生活，每周一发布，欢迎关注",
+    "site.title": "wuyutaott 的博客",
+    "site.description": "wuyutaott 的个人博客，记录技术、生活与思考",
     "search.placeholder": "搜索文章...",
   },
   en: {

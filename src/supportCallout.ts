@@ -1,12 +1,13 @@
 export const SUPPORT_CALLOUT = {
-  zh: "觉得不错，请 Tw93 喝冰可乐 🥤",
-  en: "Buy me a coke 🥤",
-  link: "https://cats.tw93.fun?name=潮流周刊",
+  zh: "觉得不错请请我喝杯咖啡 ☕",
+  en: "Buy me a coffee ☕",
+  link: "", // 留空 = 不渲染 callout 按钮。填上 buymeacoffee/afdian/微信赞赏码 等链接即生效
 };
 
 export const renderSupportCalloutForRSS = (lang: "zh" | "en" = "zh") => {
   const cta = SUPPORT_CALLOUT[lang] ?? SUPPORT_CALLOUT.zh;
   const { link } = SUPPORT_CALLOUT;
+  if (!link) return ""; // 没设链接就不渲染
   return `
     <hr style="border:none;border-top:0.5px solid rgba(0,0,0,0.08);margin:26px 0 14px;" />
     <p style="text-align:left;margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
