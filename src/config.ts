@@ -14,9 +14,9 @@ export const SITE = {
 
 export const GISCUS_CONFIG = {
   repo: "wuyutaott/blog",
-  repoId: "",
-  category: "General",
-  categoryId: "",
+  repoId: "R_kgDOSWIJTA",
+  category: "Announcements",
+  categoryId: "DIC_kwDOSWIJTM4C8dpB",
   mapping: "title",
   strict: "0",
   reactionsEnabled: "1",
