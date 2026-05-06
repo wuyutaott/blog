@@ -1,0 +1,21 @@
+---
+export interface Props {
+  allPosts: any[];
+}
+
+const { allPosts } = Astro.props;
+---
+
+{
+  allPosts.slice(0, 12).map((post, index) => {
+    const image = post.frontmatter.image;
+    if (!image) return null;
+    const href = `${image}?x-oss-process=image/resize,w_640/format,webp`;
+    // Mobile & PC: Preload top 3 (always needed)
+    if (index < 3) {
+      return <link rel='preload' href={href} as='image' fetchpriority='high' />;
+    }
+    // PC Only: Preload next 9 (hidden on mobile to save bandwidth)
+    return <link rel='preload' href={href} as='image' media='(min-width: 768px)' />;
+  })
+}

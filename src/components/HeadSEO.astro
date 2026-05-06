@@ -1,0 +1,84 @@
+---
+import { SITE } from '@/config';
+export interface Props {
+  content: any;
+  pageURL: URL | string;
+}
+const { icon, keywords, author, twitterId, homePage, title, siteImage, description: siteDescription } = SITE;
+const { content = {}, pageURL } = Astro.props;
+const { title: contentTitle, socialImage, description: contentDescription, image } = content;
+
+const pageTitle = contentTitle ? `${title}${contentTitle}` : title;
+// Check if this is an article page
+const isArticle = contentTitle && content.date;
+const imageSrc = isArticle ? (socialImage || siteImage) : icon;
+const description = contentDescription || siteDescription;
+const preloadImage = image ? `${image}?x-oss-process=image/resize,w_1200/format,webp` : false;
+const canonicalURL = new URL(pageURL, homePage).href;
+
+// Structured data
+const structuredData = isArticle
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: contentTitle,
+      description: description,
+      image: image || imageSrc,
+      author: {
+        '@type': 'Person',
+        name: author,
+        url: `https://twitter.com/${twitterId}`,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: title,
+        logo: {
+          '@type': 'ImageObject',
+          url: icon,
+        },
+      },
+      datePublished: content.date,
+      dateModified: content.date,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonicalURL,
+      },
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: title,
+      description: siteDescription,
+      url: homePage,
+      author: {
+        '@type': 'Person',
+        name: author,
+      },
+    };
+---
+
+<!-- Canonical URL -->
+<link rel='canonical' href={canonicalURL} />
+
+<meta name='twitter:card' content='summary_large_image' />
+<meta name='twitter:image' content={imageSrc} />
+<meta name='twitter:site' content={homePage} />
+<meta property='twitter:url' content={pageURL} />
+<meta name='twitter:creator' content={`@${twitterId}`} />
+<meta property='twitter:description' content={description} />
+<meta name='keywords' content={keywords} />
+<meta name='author' content={author} />
+<meta name='description' content={description} />
+<meta property='og:type' content={isArticle ? 'article' : 'website'} />
+<meta property='og:title' content={pageTitle} />
+<meta property='og:image' content={imageSrc} />
+<meta property='og:description' content={description} />
+<meta property='og:url' content={pageURL} />
+<meta property='og:site_name' content={title} />
+{isArticle && content.date && <meta property='article:published_time' content={content.date} />}
+{isArticle && <meta property='article:author' content={author} />}
+
+<!-- JSON-LD Structured Data -->
+<script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
+
+{preloadImage && <link rel='preload' href={preloadImage} as='image' />}

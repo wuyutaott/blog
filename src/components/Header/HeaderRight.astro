@@ -1,0 +1,27 @@
+---
+import { SITE } from '@/config';
+import HeaderLink from './HeaderLink.astro';
+import Search from './Search.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const { blogPage, twitterId, githubId } = SITE;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class='flex-grow text-right flex items-center justify-end gap-4'>
+  <HeaderLink href={blogPage} target='_blank' class='hidden md:inline-flex'>{t('nav.home')}</HeaderLink>
+  <HeaderLink href={`https://twitter.com/${twitterId}`} target='_blank' class='lg:inline-flex hidden'>{t('nav.twitter')}</HeaderLink>
+  <HeaderLink href={`https://github.com/${githubId}`} target='_blank' class='hidden md:inline-flex'>{t('nav.github')}</HeaderLink>
+  <HeaderLink href={lang === 'en' ? '/en/rss.xml' : '/rss.xml'} target='_blank' class='hidden md:inline-flex' title='RSS'>RSS</HeaderLink>
+
+  <Search />
+  <a
+    href={lang === 'en' ? '/' : '/en'}
+    class='flex items-center justify-center h-9 w-9 rounded-full !bg-gray-100 dark:!bg-gray-800 text-sm font-medium transition-colors !text-gray-600 dark:!text-gray-400 hover:!text-gray-900 dark:hover:!text-gray-200'
+    aria-label={lang === 'en' ? 'Switch to Chinese' : 'Switch to English'}
+    style='text-decoration: none;'
+  >
+    {lang === 'en' ? '中' : 'En'}
+  </a>
+</div>

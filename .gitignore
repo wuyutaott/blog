@@ -1,0 +1,36 @@
+# 敏感运维配置
+.env
+.env.local
+.env.*.local
+
+# 私人运维手册的旧版本备份（已迁移到 docs/，敏感值已抽到 .env）
+OPS_NOTES.md*
+
+# AI / IDE 元数据
+.omc/
+.claude/
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# 调研用的克隆仓库
+/github
+
+# Astro / Node 构建产物
+node_modules/
+dist/
+.astro/
+.vercel/
+.netlify/
+pnpm-lock.yaml.bak
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Pagefind 索引（构建期生成，不进 git）
+public/pagefind/

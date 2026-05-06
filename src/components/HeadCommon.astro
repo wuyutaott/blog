@@ -1,0 +1,24 @@
+---
+import '../styles/theme.css';
+import '../styles/index.css';
+import { SITE } from '@/config';
+const { icon } = SITE;
+---
+
+<!-- Global Metadata -->
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width' />
+
+<!-- DNS Prefetch and Preconnect for performance -->
+<link rel='dns-prefetch' href='https://giscus.app' />
+<link rel='preconnect' href='https://giscus.app' crossorigin />
+
+<link rel='icon' href='/favicon.ico' />
+<link rel='icon' type='image/png' sizes='32x32' href='/icon-32.png' />
+<link rel='icon' type='image/png' sizes='144x144' href={icon} />
+<link rel='apple-touch-icon' sizes='144x144' href={icon} />
+<link rel='sitemap' href='/sitemap.xml' />
+<!-- Canonical URL is handled in HeadSEO.astro (included via BaseLayout) -->
+
+<!-- Note: This CSS loads font subsets ONLY. The 8.6MB fallback has been removed for performance. -->
+<link rel='stylesheet' href='/fonts/jinkai.css' />
