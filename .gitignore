@@ -32,5 +32,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# dev-start.sh / dev-stop.sh 运行时产物
+.dev.pid
+.dev.log
+
 # Pagefind 索引（构建期生成，不进 git）
 public/pagefind/
+
+image/

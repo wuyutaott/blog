@@ -2,6 +2,8 @@
 date: 2026/05/06
 ---
 
+<img src="https://cdn.wuyutaott.com/2026/05/iceland-aurora.jpg" width="800" />
+
 <small>这是博客的第一篇测试文章，用来验证整个工具链是否跑通：Astro 构建、Markdown 渲染、文章路由、CDN 图片、自动 sitemap、RSS 等等。</small>
 
 > **博客已上线，欢迎来玩。**
