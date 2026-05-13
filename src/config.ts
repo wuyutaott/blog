@@ -1,8 +1,8 @@
 export const SITE = {
-  title: "wuyutaott 的博客",
+  title: "颓涛AIGC",
   author: "wuyutaott",
-  description: "wuyutaott 的个人博客，记录技术、生活与思考",
-  keywords: "wuyutaott,Blog,博客,技术,生活",
+  description: "颓涛AIGC 的个人博客，记录技术、生活与思考",
+  keywords: "颓涛AIGC,AIGC,wuyutaott,Blog,博客,技术,生活",
   icon: "https://blog.wuyutaott.com/icon-144.png",
   siteImage: "https://blog.wuyutaott.com/icon-144.png",
   homePage: "https://blog.wuyutaott.com",
